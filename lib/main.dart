@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import './HomePage.dart';
+import './AllRecipesPage.dart';
 
 void main() {
   runApp(MyApp());
@@ -13,7 +14,7 @@ class MyApp extends StatefulWidget {
 }
 
 const MaterialColor pink = const MaterialColor(
-  0xFF880E4F,
+  0XFFE91E63,
   const <int, Color>{
     50: const Color(0xFF880E4F),
     100: const Color(0xFF880E4F),
@@ -32,8 +33,9 @@ class MyAppState extends State<MyApp> {
   int _selectedPage = 0;
   final _pageOptions = [
     HomePage(),
-    Text('Index 1: Profile'),
-    Text('Index 2: All'),
+    Text('Index 1: add'),
+    AllRecipesPage(),
+    Text('Index 3: Saved'),
   ];
 
   @override
@@ -47,13 +49,16 @@ class MyAppState extends State<MyApp> {
         appBar: AppBar(
           title: Text(
             'My Recipes',
-            style: TextStyle(color: Colors.pink[900]),
+            style: TextStyle(color: Colors.pink),
           ),
-          backgroundColor: Colors.white,
+          backgroundColor: Colors.grey[800],
         ),
         body: _pageOptions[_selectedPage],
         bottomNavigationBar: BottomNavigationBar(
+          type: BottomNavigationBarType.fixed,
+          backgroundColor: Colors.grey[800],
           currentIndex: _selectedPage,
+          unselectedItemColor: Colors.white,
           onTap: (int index) {
             setState(() {
               _selectedPage = index;
@@ -61,17 +66,21 @@ class MyAppState extends State<MyApp> {
           },
           items: [
             BottomNavigationBarItem(
-              icon: Icon(Icons.add),
+              icon: Icon(Icons.home),
+              title: Text('Home'),
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.add_circle),
               title: Text('Add'),
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.account_circle),
-              title: Text('Profile'),
+              icon: Icon(Icons.apps),
+              title: Text('All'),
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.person),
-              title: Text('All'),
-            )
+              icon: Icon(Icons.save),
+              title: Text('Saved'),
+            ),
           ],
         ),
       ),
