@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import './HomePage.dart';
 import './AllRecipesPage.dart';
+import './FavoriteRecipesPage.dart';
 
 void main() {
   runApp(MyApp());
@@ -35,7 +36,7 @@ class MyAppState extends State<MyApp> {
     HomePage(),
     Text('Index 1: add'),
     AllRecipesPage(),
-    Text('Index 3: Saved'),
+    FavoriteRecipesPage(),
   ];
 
   @override
@@ -66,7 +67,7 @@ class MyAppState extends State<MyApp> {
           },
           items: [
             BottomNavigationBarItem(
-              icon: Icon(Icons.home),
+              icon: Icon(Icons.fastfood),
               title: Text('Home'),
             ),
             BottomNavigationBarItem(
@@ -78,8 +79,8 @@ class MyAppState extends State<MyApp> {
               title: Text('All'),
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.save),
-              title: Text('Saved'),
+              icon: Icon(Icons.favorite_border),
+              title: Text('Loved'),
             ),
           ],
         ),

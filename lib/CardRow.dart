@@ -15,12 +15,12 @@ class CardRow extends StatelessWidget {
         child: Stack(
           children: <Widget>[
             card(data),
-            planetThumbnail(),
+            planetThumbnail(data),
           ],
         ));
   }
 
-  Widget planetThumbnail() {
+  Widget planetThumbnail(data) {
     return Container(
       margin: (index % 2 == 0)
           ? const EdgeInsets.only(left: 270.0)
@@ -30,7 +30,7 @@ class CardRow extends StatelessWidget {
       alignment: FractionalOffset.centerLeft,
       child: ClipOval(
         child: Image(
-          image: AssetImage("Images/food.jpg"),
+          image: AssetImage(data['image']),
           height: 92.0,
           width: 92.0,
           fit: BoxFit.cover,
