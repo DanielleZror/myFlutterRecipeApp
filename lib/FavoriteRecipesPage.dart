@@ -24,6 +24,7 @@ class FavoriteRecipesPage extends StatelessWidget {
                     child: Card(
                       child: Container(
                         decoration: BoxDecoration(
+//                          borderRadius: BorderRadius.circular(8.0),
                           border: Border(
                             top: BorderSide(width: 2.0, color: Colors.pink),
                           ),
@@ -44,7 +45,7 @@ class FavoriteRecipesPage extends StatelessWidget {
                                 children: <Widget>[
                                   recipeName(data[index]),
                                   recipeDescription(data[index]),
-                                  recipeDetails(),
+                                  recipeDetails(data[index]),
                                 ],
                               ),
                             ),
@@ -94,7 +95,7 @@ class FavoriteRecipesPage extends StatelessWidget {
       child: RichText(
         textAlign: TextAlign.left,
         text: TextSpan(
-          text: '${data['value']}',
+          text: '${data['description']}',
           style: TextStyle(
             color: Colors.grey[800],
             fontSize: 20,
@@ -104,41 +105,53 @@ class FavoriteRecipesPage extends StatelessWidget {
     );
   }
 
-  Widget recipeDetails() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: <Widget>[
-        Column(
-          children: <Widget>[
-            Row(
-              children: <Widget>[
-                Icon(Icons.perm_identity, color: Colors.pink),
-                Text('Danielel'),
-              ],
-            ),
-          ],
-        ),
-        Column(
-          children: <Widget>[
-            Row(
-              children: <Widget>[
-                Icon(Icons.favorite_border, color: Colors.pink),
-                Text('24'),
-              ],
-            ),
-          ],
-        ),
-        Column(
-          children: <Widget>[
-            Row(
-              children: <Widget>[
-                Icon(Icons.access_time, color: Colors.pink),
-                Text('1:10')
-              ],
-            ),
-          ],
-        ),
-      ],
+  Widget recipeDetails(data) {
+    return Padding(
+      padding: const EdgeInsets.only(left: 7.0, right: 7.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: <Widget>[
+          Column(
+            children: <Widget>[
+              Row(
+                children: <Widget>[
+                  Icon(Icons.perm_identity, color: Colors.pink),
+                  Text('${data['athor']}'),
+                ],
+              ),
+            ],
+          ),
+          Column(
+            children: <Widget>[
+              Row(
+                children: <Widget>[
+                  Icon(Icons.favorite_border, color: Colors.pink),
+                  (int.parse(data['likes']) < 500)
+                      ? Text('${data['likes']}')
+                      : Text('500+'),
+                ],
+              ),
+            ],
+          ),
+          Column(
+            children: <Widget>[
+              Row(
+                children: <Widget>[
+                  Icon(Icons.access_time, color: Colors.pink),
+                  (int.parse(data['hours']) > 0 &&
+                          int.parse(data['minutes']) == 0)
+                      ? Text('${data['hours']}' + 'h')
+                      : (int.parse(data['hours']) == 0 &&
+                              int.parse(data['minutes']) > 0)
+                          ? Text('${data['minutes']}' + 'm')
+                          : Text(
+                              '${data['hours']}' + ':' + '${data['minutes']}'),
+                ],
+              ),
+            ],
+          ),
+        ],
+      ),
     );
   }
 }

@@ -1,129 +1,65 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import './data.dart';
 
 class HomePage extends StatelessWidget {
-  var cryptoData = Data.getData;
+  var data = Data.getData;
+  TabController _tabController;
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-        home: Scaffold(
-            body: Container(
-      child: Column(
-        mainAxisSize: MainAxisSize.max,
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: <Widget>[
-          Expanded(
-            child: ListView.builder(
-// scrollDirection: Axis.horizontal,
-                itemCount: cryptoData.length,
-                itemBuilder: (context, index) {
-                  return Container(
-                    padding: EdgeInsets.fromLTRB(10, 10, 10, 0),
-                    height: 200,
-                    width: double.maxFinite,
-                    child: Card(
-                      elevation: 5,
-                      child: Container(
-                        decoration: BoxDecoration(
-                          border: Border(
-                            top: BorderSide(
-                                width: 2.0,
-                                color: cryptoData[index]['iconColor']),
-                          ),
-                          color: Colors.white,
-                        ),
-                        child: Padding(
-                          padding: EdgeInsets.all(7),
-                          child: Stack(children: <Widget>[
-                            Align(
-                              alignment: Alignment.centerRight,
-                              child: Stack(
-                                children: <Widget>[
-                                  Padding(
-                                      padding: const EdgeInsets.only(
-                                          left: 10, top: 5),
-                                      child: Column(
-                                        children: <Widget>[
-                                          Row(
-                                            children: <Widget>[
-                                              cryptoIcon(cryptoData[index]),
-                                              SizedBox(
-                                                height: 10,
-                                              ),
-                                              cryptoNameSymbol(
-                                                  cryptoData[index]),
-                                              Spacer(),
-                                            ],
-                                          ),
-                                          Row(
-                                            children: <Widget>[
-                                              cryptoAmount(cryptoData[index])
-                                            ],
-                                          )
-                                        ],
-                                      ))
-                                ],
-                              ),
-                            )
-                          ]),
-                        ),
-                      ),
-                    ),
-                  );
-                }),
-          ),
-        ],
-      ),
-    )));
-  }
-
-  Widget cryptoIcon(data) {
-    return Padding(
-      padding: const EdgeInsets.only(left: 15.0),
-      child: Align(
-          alignment: Alignment.centerLeft,
-          child: Icon(
-            data['icon'],
-            color: data['iconColor'],
-            size: 40,
-          )),
-    );
-  }
-
-  Widget cryptoNameSymbol(data) {
-    return Align(
-      alignment: Alignment.centerLeft,
-      child: RichText(
-        text: TextSpan(
-          text: '${data['name']}',
-          style: TextStyle(
-              fontWeight: FontWeight.bold,
-              color: Colors.grey[800],
-              fontSize: 30),
-        ),
-      ),
-    );
-  }
-
-  Widget cryptoAmount(data) {
-    return Align(
-      alignment: Alignment.centerLeft,
-      child: Padding(
-        padding: const EdgeInsets.only(left: 20.0),
-        child: Row(
-          children: <Widget>[
-            RichText(
-              textAlign: TextAlign.left,
-              text: TextSpan(
-                text: '\n${data['value']}',
-                style: TextStyle(
-                  color: Colors.grey[800],
-                  fontSize: 20,
+    return Scaffold(
+      body: StaggeredGridView.countBuilder(
+        shrinkWrap: true,
+        primary: false,
+        crossAxisCount: 4,
+        itemCount: data.length,
+        itemBuilder: (BuildContext context, int index) => Container(
+          child: Column(
+            children: <Widget>[
+              ClipRRect(
+                borderRadius: BorderRadius.circular(8),
+                child: Image(
+                  image: AssetImage(data[index]['image']),
+                  fit: BoxFit.cover,
                 ),
               ),
-            ),
-          ],
+              Container(
+                  width: 200,
+                  margin: EdgeInsets.symmetric(horizontal: 3),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      SizedBox(height: 4),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: <Widget>[
+                          Text(
+                            data[index]['name'],
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold, fontSize: 22),
+                          ),
+                          Icon(
+                            Icons.favorite_border,
+                            color: Colors.pink.withOpacity(0.8),
+                          ),
+                        ],
+                      ),
+                      SizedBox(height: 3),
+                      Text(
+                        data[index]['description'],
+                        style: TextStyle(color: Colors.grey[800], fontSize: 18),
+                      ),
+                    ],
+                  ))
+            ],
+          ),
         ),
+        staggeredTileBuilder: (int index) =>
+            StaggeredTile.count(2, index.isEven ? 3 : 2),
+        mainAxisSpacing: 24,
+        crossAxisSpacing: 12,
+        padding: const EdgeInsets.all(12),
       ),
     );
   }

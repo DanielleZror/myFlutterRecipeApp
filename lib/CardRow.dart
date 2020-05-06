@@ -52,7 +52,7 @@ class CardRow extends StatelessWidget {
           BoxShadow(
             color: Colors.grey[700],
             blurRadius: 10.0,
-            offset: Offset(0.0, 5.0),
+            //    offset: Offset(0.0, 5.0),
           ),
         ],
       ),
