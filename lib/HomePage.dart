@@ -20,17 +20,18 @@ class HomePage extends StatelessWidget {
               child: Column(
                 children: <Widget>[
                   TabBar(
+                    indicatorColor: Colors.pink,
                     tabs: <Widget>[
                       Tab(
                         icon: Icon(
                           Icons.photo_library,
-                          color: Colors.pink,
+                          color: Colors.white,
                         ),
                       ),
                       Tab(
                         icon: Icon(
                           Icons.list,
-                          color: Colors.pink,
+                          color: Colors.white,
                         ),
                       ),
                     ],

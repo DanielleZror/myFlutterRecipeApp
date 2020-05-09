@@ -21,8 +21,8 @@ class Data {
       'likes': '503',
     },
     {
-      'name': 'Wanted ',
-      'description': 'Smoothie bowl',
+      'name': 'Wanted l very very very vey veyu',
+      'description': 'Smoothie bowl very very very vey veyu veryu',
       'image': 'Images/wanted.jpg',
       'athor': 'danielle',
       'hours': '1',
@@ -30,7 +30,7 @@ class Data {
       'likes': '7',
     },
     {
-      'name': 'Danielle',
+      'name': 'Danielle very very very very',
       'description': 'Smoothie bowl',
       'image': 'Images/danielle.jpg',
       'athor': 'danielle',

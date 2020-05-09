@@ -52,6 +52,17 @@ class MyAppState extends State<MyApp> {
             'My Recipes',
             style: TextStyle(color: Colors.pink),
           ),
+          actions: <Widget>[
+            IconButton(
+              icon: Icon(Icons.search),
+              onPressed: () {
+                showSearch(
+                  context: context,
+//                  delegate: DataSearch(listWords),
+                );
+              },
+            ),
+          ],
           backgroundColor: Colors.grey[800],
         ),
         body: _pageOptions[_selectedPage],
