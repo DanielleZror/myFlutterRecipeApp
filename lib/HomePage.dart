@@ -13,10 +13,9 @@ class HomePage extends StatelessWidget {
         length: 2,
         child: Scaffold(
           appBar: PreferredSize(
-            preferredSize: Size(40, 27),
+            preferredSize: Size(0, 27),
             child: Container(
               color: Colors.grey[700],
-              //   child: SafeArea(
               child: Column(
                 children: <Widget>[
                   TabBar(
@@ -38,7 +37,6 @@ class HomePage extends StatelessWidget {
                   ),
                 ],
               ),
-              //   ),
             ),
           ),
           body: TabBarView(

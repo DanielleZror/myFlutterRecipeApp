@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import './ViewRecipePage.dart';
 
 class ListGrid extends StatefulWidget {
   final data;
@@ -37,39 +38,49 @@ class _ListGridState extends State<ListGrid> {
               child: ListView.builder(
                 itemCount: data.length,
                 itemBuilder: (context, index) {
-                  return Container(
-                    color: Colors.grey[800],
-                    padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
-                    height: 160,
-                    width: double.maxFinite,
-                    child: Card(
-                      child: Container(
-                        decoration: BoxDecoration(
-                          border: Border(
-                            top: BorderSide(width: 2.0, color: Colors.pink),
+                  return GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) =>
+                                ViewRecipePage(recipe: data[index])),
+                      );
+                    },
+                    child: Container(
+                      color: Colors.grey[800],
+                      padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
+                      height: 160,
+                      width: double.maxFinite,
+                      child: Card(
+                        child: Container(
+                          decoration: BoxDecoration(
+                            border: Border(
+                              top: BorderSide(width: 2.0, color: Colors.pink),
+                            ),
+                            color: Colors.white,
                           ),
-                          color: Colors.white,
-                        ),
-                        child: Row(
-                          children: <Widget>[
-                            Expanded(
-                              flex: 3,
-                              child: recipeImage(data[index]),
-                            ),
-                            Expanded(
-                              flex: 7,
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
-                                children: <Widget>[
-                                  recipeName(data[index]),
-                                  recipeDescription(data[index]),
-                                  recipeDetails(data[index], index),
-                                ],
+                          child: Row(
+                            children: <Widget>[
+                              Expanded(
+                                flex: 3,
+                                child: recipeImage(data[index]),
                               ),
-                            ),
-                          ],
+                              Expanded(
+                                flex: 7,
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
+                                  children: <Widget>[
+                                    recipeName(data[index]),
+                                    recipeDescription(data[index]),
+                                    recipeDetails(data[index], index),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                     ),
