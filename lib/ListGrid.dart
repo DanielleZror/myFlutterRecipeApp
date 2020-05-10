@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:myrecipesflutterapp/Models/recipe.dart';
-import './Widgets/Card/ListCard.dart';
+import './Widgets/Card/ListGridCard.dart';
 
 class ListGrid extends StatefulWidget {
   final data;

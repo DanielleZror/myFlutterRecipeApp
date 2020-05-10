@@ -1,7 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-import './ViewRecipePage.dart';
+import 'package:myrecipesflutterapp/Models/recipe.dart';
+import './Widgets/Card/PhotoGridCard.dart';
 
 class PhotoGrid extends StatefulWidget {
   final data;
@@ -35,71 +36,16 @@ class _PhotoGridState extends State<PhotoGrid> {
         primary: false,
         crossAxisCount: 4,
         itemCount: data.length,
-        itemBuilder: (BuildContext context, int index) => GestureDetector(
-          onTap: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => ViewRecipePage(recipe: data[index])),
-            );
-          },
-          child: Container(
-            color: Colors.white,
-            child: Column(
-              children: <Widget>[
-                ClipRRect(
-                  child: Image(
-                    image: AssetImage(data[index]['image']),
-                    fit: BoxFit.cover,
-                  ),
-                ),
-                Divider(
-                  color: Colors.pink,
-                  thickness: 2,
-                ),
-                Container(
-                    margin: EdgeInsets.symmetric(horizontal: 3),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        SizedBox(height: 4),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: <Widget>[
-                            Container(
-                              width: 135,
-                              child: Text(
-                                data[index]['name'],
-                                overflow: TextOverflow.ellipsis,
-                                maxLines: 2,
-                                style: TextStyle(
-                                    fontWeight: FontWeight.bold, fontSize: 22),
-                              ),
-                            ),
-                            IconButton(
-                              iconSize: 25,
-                              padding: const EdgeInsets.all(0.0),
-                              icon: (_isFavorited[index]
-                                  ? Icon(Icons.favorite)
-                                  : Icon(Icons.favorite_border)),
-                              color: Colors.pink,
-                              onPressed: () => _toggleFavorite(index),
-                            ),
-                          ],
-                        ),
-                        SizedBox(height: 3),
-                        Text(
-                          data[index]['description'],
-                          style:
-                              TextStyle(color: Colors.grey[800], fontSize: 18),
-                          overflow: TextOverflow.ellipsis,
-                          maxLines: 2,
-                        ),
-                        SizedBox(height: 10),
-                      ],
-                    ))
-              ],
-            ),
+        itemBuilder: (BuildContext context, int index) => PhotoCard(
+          Recipe(
+            data[index]['name'],
+            data[index]['description'],
+            data[index]['author'],
+            int.parse(data[index]['hours']),
+            int.parse(data[index]['minutes']),
+            data[index]['image'],
+            int.parse(data[index]['likes']),
+            _isFavorited[index],
           ),
         ),
         staggeredTileBuilder: (int index) => StaggeredTile.fit(2),

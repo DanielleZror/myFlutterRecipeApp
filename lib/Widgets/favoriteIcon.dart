@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-Widget favoriteIcon(isFavorited, likes, _toggleFavorite) {
+Widget favoriteIcon(isFavorited, withNumber, likes, _toggleFavorite) {
   return Column(
     children: <Widget>[
       Row(
@@ -13,7 +13,7 @@ Widget favoriteIcon(isFavorited, likes, _toggleFavorite) {
               size: 24,
             ),
           ),
-          (likes < 500) ? Text(likes.toString()) : Text('500+'),
+          if (withNumber) (likes < 500) ? Text(likes.toString()) : Text('500+'),
         ],
       ),
     ],

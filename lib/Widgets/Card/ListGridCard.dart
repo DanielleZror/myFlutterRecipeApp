@@ -156,7 +156,8 @@ class _ListCardState extends State<ListCard> {
               children: <Widget>[
                 Row(
                   children: <Widget>[
-                    favoriteIcon(widget.recipe.isFavorite, widget.recipe.likes,
+                    favoriteIcon(
+                        widget.recipe.isFavorite, true, widget.recipe.likes,
                         () {
                       _toggleFavorite();
                     }),
