@@ -8,6 +8,8 @@ class FavoriteRecipesPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(body: ListGrid(data));
+    return MaterialApp(
+      home: ListGrid(data),
+    );
   }
 }

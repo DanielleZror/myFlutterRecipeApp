@@ -31,6 +31,7 @@ const MaterialColor pink = const MaterialColor(
 );
 
 class MyAppState extends State<MyApp> {
+  bool _isSearching = false;
   int _selectedPage = 0;
   final _pageOptions = [
     HomePage(),
@@ -48,20 +49,40 @@ class MyAppState extends State<MyApp> {
       ),
       home: Scaffold(
         appBar: AppBar(
-          title: Text(
-            'My Recipes',
-            style: TextStyle(color: Colors.pink),
-          ),
+          title: !_isSearching
+              ? Text(
+                  'My Recipes',
+                  style: TextStyle(color: Colors.pink),
+                )
+              : TextField(
+                  style: TextStyle(color: Colors.white),
+                  decoration: InputDecoration(
+                    icon: Icon(
+                      Icons.search,
+                      color: Colors.pink,
+                    ),
+                    hintText: 'Search a reacipe',
+                    hintStyle: TextStyle(color: Colors.white),
+                  ),
+                ),
           actions: <Widget>[
-            IconButton(
-              icon: Icon(Icons.search),
-              onPressed: () {
-                showSearch(
-                  context: context,
-//                  delegate: DataSearch(listWords),
-                );
-              },
-            ),
+            _isSearching
+                ? IconButton(
+                    icon: Icon(Icons.cancel),
+                    onPressed: () {
+                      setState(() {
+                        this._isSearching = false;
+                      });
+                    },
+                  )
+                : IconButton(
+                    icon: Icon(Icons.search),
+                    onPressed: () {
+                      setState(() {
+                        this._isSearching = true;
+                      });
+                    },
+                  ),
           ],
           backgroundColor: Colors.grey[800],
         ),
